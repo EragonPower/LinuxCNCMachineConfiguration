@@ -1,0 +1,10 @@
+# Include your custom HAL commands here
+# This file will not be overwritten when you run PNCconf again
+# Edits
+
+# ------ESTOP------
+net estop-ext     =>  halui.estop.activate
+
+# ------Machine Enable Input------
+net machine-enable <= hm2_7i76e.0.7i76.0.0.input-14
+net machine-enable => halui.machine.on
