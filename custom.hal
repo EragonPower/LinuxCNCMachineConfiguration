@@ -2,9 +2,35 @@
 # This file will not be overwritten when you run PNCconf again
 # Edits
 
+
+#loadrt and2 count=2
+
+#addf and2.0 servo-thread
+#addf and2.1 servo-thread
+
 # ------ESTOP------
 net estop-ext     =>  halui.estop.activate
 
 # ------Machine Enable Input------
 net machine-enable <= hm2_7i76e.0.7i76.0.0.input-14
 net machine-enable => halui.machine.on
+
+# ------Spindle dir------
+
+# --- SPINDLE-CW ---
+setp hm2_7i76e.0.gpio.026.is_output true
+setp    hm2_7i76e.0.gpio.026.is_opendrain  true
+net mesaSpindleFWD  =>     hm2_7i76e.0.gpio.026.out
+
+# --- SPINDLE-CCW ---
+setp hm2_7i76e.0.gpio.028.is_output true
+setp    hm2_7i76e.0.gpio.028.is_opendrain  true
+net mesaSpindleREV  =>     hm2_7i76e.0.gpio.028.out
+
+#net spindle-enable and2.0.in0
+#net spindle-cw and2.0.in1
+#net mesaSpindleREV and2.0.out
+
+#net spindle-enable and2.1.in0
+#net spindle-ccw and2.1.in1
+#net mesaSpindleREV and2.1.out
