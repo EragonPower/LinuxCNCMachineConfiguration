@@ -3,34 +3,75 @@
 # Edits
 
 
-#loadrt and2 count=2
+loadrt and2 count=2
 
-#addf and2.0 servo-thread
-#addf and2.1 servo-thread
+addf and2.0 servo-thread
+addf and2.1 servo-thread
 
 # ------ESTOP------
-net estop-ext     =>  halui.estop.activate
+#net estop-ext     =>  halui.estop.activate
 
 # ------Machine Enable Input------
-net machine-enable <= hm2_7i76e.0.7i76.0.0.input-14
-net machine-enable => halui.machine.on
+#net machine-enable <= hm2_7i76e.0.7i76.0.0.input-14
+#net machine-enable => halui.machine.on
 
 # ------Spindle dir------
 
 # --- SPINDLE-CW ---
-setp hm2_7i76e.0.gpio.026.is_output true
-setp    hm2_7i76e.0.gpio.026.is_opendrain  true
-net mesaSpindleFWD  =>     hm2_7i76e.0.gpio.026.out
+setp hm2_7i76e.0.gpio.023.is_output true
+setp    hm2_7i76e.0.gpio.023.is_opendrain  true
+net mesaSpindleFWD  =>     hm2_7i76e.0.gpio.023.out
+setp hm2_7i76e.0.gpio.023.invert_output true
 
 # --- SPINDLE-CCW ---
-setp hm2_7i76e.0.gpio.028.is_output true
-setp    hm2_7i76e.0.gpio.028.is_opendrain  true
-net mesaSpindleREV  =>     hm2_7i76e.0.gpio.028.out
+setp hm2_7i76e.0.gpio.024.is_output true
+setp    hm2_7i76e.0.gpio.024.is_opendrain  true
+net mesaSpindleREV  =>     hm2_7i76e.0.gpio.024.out
+setp hm2_7i76e.0.gpio.024.invert_output true
 
-#net spindle-enable and2.0.in0
-#net spindle-cw and2.0.in1
-#net mesaSpindleREV and2.0.out
+net spindle-enable and2.0.in0
+net spindle-cw and2.0.in1
+net mesaSpindleFWD and2.0.out
 
-#net spindle-enable and2.1.in0
-#net spindle-ccw and2.1.in1
-#net mesaSpindleREV and2.1.out
+net spindle-enable and2.1.in0
+net spindle-ccw and2.1.in1
+net mesaSpindleREV and2.1.out
+
+# ------Alarm Pins------
+#PIN 8 TB5 = hm2_7i76e.0.7i76.0.0.input-23
+#PIN 7 TB5 = hm2_7i76e.0.7i76.0.0.input-22
+#PIN 6 TB5 = hm2_7i76e.0.7i76.0.0.input-21
+#PIN 5 TB5 = hm2_7i76e.0.7i76.0.0.input-20
+
+# --- X drive ALM ---
+net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-23
+
+# --- X2 drive ALM ---
+net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-22
+
+# --- Y drive ALM ---
+net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-21
+
+# --- Z drive ALM ---
+net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-20
+
+# --- Spindle ALM ---
+#net spindle-fault => spindle.0.amp-fault-in <=  hm2_7i76e.0.7i76.0.0.input-07
+
+
+#  ---coolant signals---
+
+net coolant-mist      <=  iocontrol.0.coolant-mist
+net coolant-flood     <=  iocontrol.0.coolant-flood
+
+
+
+setp hm2_7i76e.0.gpio.021.is_output true
+setp    hm2_7i76e.0.gpio.021.is_opendrain  true
+net coolant-mist  =>     hm2_7i76e.0.gpio.021.out
+setp hm2_7i76e.0.gpio.021.invert_output true
+
+setp hm2_7i76e.0.gpio.022.is_output true
+setp    hm2_7i76e.0.gpio.022.is_opendrain  true
+net coolant-flood  =>     hm2_7i76e.0.gpio.022.out
+setp hm2_7i76e.0.gpio.022.invert_output true
