@@ -44,19 +44,27 @@ net mesaSpindleREV and2.1.out
 #PIN 5 TB5 = hm2_7i76e.0.7i76.0.0.input-20
 
 # --- X drive ALM ---
-net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-23
+net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-20
 
 # --- X2 drive ALM ---
-net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-22
+net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-21
 
 # --- Y drive ALM ---
-net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-21
+net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-22
 
 # --- Z drive ALM ---
-net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-20
+net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-23
 
 # --- Spindle ALM ---
 #net spindle-fault => spindle.0.amp-fault-in <=  hm2_7i76e.0.7i76.0.0.input-07
+
+
+# --- Drive Enables ---
+net machine-is-enabled  => driveEnable <= hm2_7i76e.0.7i76.0.0.output-00
+net x-enable  => driveEnable
+net y-enable  => driveEnable
+net z-enable  => driveEnable
+net x2-enable  => driveEnable
 
 
 #  ---coolant signals---
