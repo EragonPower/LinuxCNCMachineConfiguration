@@ -60,11 +60,11 @@ net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-23
 
 
 # --- Drive Enables ---
-net machine-is-enabled  => driveEnable <= hm2_7i76e.0.7i76.0.0.output-00
-net x-enable  => driveEnable
-net y-enable  => driveEnable
-net z-enable  => driveEnable
-net x2-enable  => driveEnable
+#net machine-is-enabled  => driveEnable <= hm2_7i76e.0.7i76.0.0.output-00
+#net x-enable  => driveEnable
+#net y-enable  => driveEnable
+#net z-enable  => driveEnable
+#net x2-enable  => driveEnable
 
 
 #  ---coolant signals---
@@ -83,3 +83,10 @@ setp hm2_7i76e.0.gpio.022.is_output true
 setp    hm2_7i76e.0.gpio.022.is_opendrain  true
 net coolant-mist  =>     hm2_7i76e.0.gpio.022.out
 setp hm2_7i76e.0.gpio.022.invert_output true
+
+
+setp hm2_7i76e.0.gpio.020.is_output true
+setp    hm2_7i76e.0.gpio.020.is_opendrain  true
+net spindle-enable  =>     hm2_7i76e.0.gpio.020.out
+setp hm2_7i76e.0.gpio.020.invert_output true
+
