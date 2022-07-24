@@ -27,9 +27,8 @@ setp hm2_7i76e.0.stepgen.timer-number 1
 
 # external input signals
 
-
-# --- ESTOP-EXT ---
-net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-04-not
+# --- ESTOP ---
+net estop-ext =>  hm2_7i76e.0.7i76.0.0.input-04-not
 
 # --- JOG-INCR-A ---
 net jog-incr-a     <=  hm2_7i76e.0.7i76.0.0.input-16
@@ -393,8 +392,16 @@ net estop-ext     =>  iocontrol.0.emc-enable-in
 #  ---manual tool change signals---
 
 loadusr -W hal_manualtoolchange
-net tool-change-request     iocontrol.0.tool-change       =>  hal_manualtoolchange.change
-net tool-change-confirmed   iocontrol.0.tool-changed      <=  hal_manualtoolchange.changed
-net tool-number             iocontrol.0.tool-prep-number  =>  hal_manualtoolchange.number
-net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+#net tool-change-request     iocontrol.0.tool-change       =>  hal_manualtoolchange.change
+#net tool-change-confirmed   iocontrol.0.tool-changed      <=  hal_manualtoolchange.changed
+#net tool-number             iocontrol.0.tool-prep-number  =>  hal_manualtoolchange.number
+#net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+
+
+#net tool-number             <=  iocontrol.0.tool-prep-number
+#net tool-change-request     <=  iocontrol.0.tool-change
+#net tool-change-confirmed   =>  iocontrol.0.tool-changed
+#net tool-prepare-request    <=  iocontrol.0.tool-prepare
+#net tool-prepare-confirmed  =>  iocontrol.0.tool-prepared
+
 

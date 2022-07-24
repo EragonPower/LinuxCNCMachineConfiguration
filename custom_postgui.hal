@@ -3,3 +3,5 @@
 
 
 net spindle-vel-fb-rpm => qtpyvcp.spindle-encoder-rpm.in
+net spindle-fb-rpm-abs-filtered => pyvcp.spindle-speed
+
