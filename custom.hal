@@ -5,7 +5,7 @@
 
 loadrt and2 count=2
 loadrt or2 count=1
-loadrt debounce cfg=1
+loadrt debounce cfg=2
 #loadrt not count=1
 
 addf and2.0 servo-thread
@@ -44,25 +44,29 @@ net spindle-ccw and2.1.in1
 net mesaSpindleREV and2.1.out
 
 # ------Alarm Pins------
-#PIN 8 TB5 = hm2_7i76e.0.7i76.0.0.input-23
-#PIN 7 TB5 = hm2_7i76e.0.7i76.0.0.input-22
-#PIN 6 TB5 = hm2_7i76e.0.7i76.0.0.input-21
-#PIN 5 TB5 = hm2_7i76e.0.7i76.0.0.input-20
 
 # --- X drive ALM ---
-net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-23
+setp hm2_7i76e.0.gpio.028.is_output false
+net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.gpio.028.in_not
 
 # --- X2 drive ALM ---
-net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-22
+setp hm2_7i76e.0.gpio.029.is_output false
+net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.gpio.029.in_not
 
 # --- Y drive ALM ---
-net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-21
+setp hm2_7i76e.0.gpio.030.is_output false
+net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.gpio.030.in_not
 
 # --- Z drive ALM ---
-net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-20
+setp hm2_7i76e.0.gpio.031.is_output false
+net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.gpio.031.in_not
+
+# --- A drive ALM ---
+setp hm2_7i76e.0.gpio.032.is_output false
+net a-fault => joint.4.amp-fault-in <= hm2_7i76e.0.gpio.032.in_not
 
 # --- Spindle ALM ---
-#net spindle-fault => spindle.0.amp-fault-in <=  hm2_7i76e.0.7i76.0.0.input-07
+net spindle-fault => spindle.0.amp-fault-in <=  hm2_7i76e.0.7i76.0.0.input-07-not
 
 
 # --- Drive Enables ---
@@ -75,8 +79,6 @@ setp hm2_7i76e.0.gpio.019.invert_output true
 
 net coolant-mist      <=  iocontrol.0.coolant-mist
 net coolant-flood     <=  iocontrol.0.coolant-flood
-
-
 
 setp hm2_7i76e.0.gpio.021.is_output true
 setp    hm2_7i76e.0.gpio.021.is_opendrain  true
@@ -98,10 +100,12 @@ setp debounce.0.delay 20
 net probe-TLO => debounce.0.0.in
 net probe-TLO-overtravel => hm2_7i76e.0.7i76.0.0.input-05
 
-#net probe-TLO-debounced => debounce.0.0.out 
+net probe-TLO-debounced => debounce.0.0.out 
 net probe-TOUCH => hm2_7i76e.0.gpio.026.in
 
-#net probe-TLO-debounced => or2.0.in0
-#net probe-TOUCH => or2.0.in1
-#net probe-in => or2.0.out
-net probe-in => debounce.0.0.out 
+net probe-TLO-debounced => or2.0.in0
+net probe-TOUCH => debounce.0.1.in
+net probe-TOUCH-debounced => debounce.0.1.out
+#net probe-TOUCH-debounced => or2.0.in1
+net probe-in => or2.0.out
+#net probe-in => debounce.0.0.out 

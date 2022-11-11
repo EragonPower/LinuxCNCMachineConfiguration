@@ -17,12 +17,12 @@ M2
 O10 endif
 
 
-#<fast_probe_fr> = #1    (set from probe screen fast probe feed rate)
-#<slow_probe_fr> = #2    (set from probe screen slow probe feedrate)
-#<z_max_travel> = #3    (max z distance the tool travels before erroring out if not contact is made)
-#<xy_max_travel> = #4    (max xy distance the tool travels before erroring out if not contact is made)
-#<retract_distance> = #6    (distance the tool retracts after making contact during fast feed mode)
-#<spindle_zero_height> = #5    (G53 distance from home to spindle nose triggering point on touch plate)
+#<fast_probe_fr> = 500    (set from probe screen fast probe feed rate)
+#<slow_probe_fr> = 100    (set from probe screen slow probe feedrate)
+#<z_max_travel> = 110    (max z distance the tool travels before erroring out if not contact is made)
+#<xy_max_travel> = 25    (max xy distance the tool travels before erroring out if not contact is made)
+#<retract_distance> = 1    (distance the tool retracts after making contact during fast feed mode)
+#<spindle_zero_height> = 0    (G53 distance from home to spindle nose triggering point on touch plate)
 #<tool_diameter_probe_mode> = #8    (activates the tool diameter probe subroutine section)
 #<tool_diameter_offset_mode> = #9    (activates the tool diameter offset position for probe subroutine section)
 #<tool_diameter> = #10    (current tool's diameter used for offseting probe position in x axis)
@@ -34,6 +34,7 @@ G92.1    (Cancel G92 offset)
 #<tool_touch_x_coords> = #5181
 #<tool_touch_y_coords> = #5182
 #<tool_touch_z_coords> = #5183
+
 
 #<tool_radius_offset> = [#<tool_diameter> / 2]
 #<offset_probing_position> = [#<tool_touch_x_coords> - #<tool_radius_offset>]
@@ -51,7 +52,6 @@ o<110> endif
 M70                                            ( save current modal state )
 M9                                             ( turn off coolant, will be restored on return if it was on )
 M5                                             ( turn off spindle, cannot be on during the probe )
-G30.1                                          ( save current position in #5181-#5183... )
 G49                                            ( clear tool length compensation )
 G90                                            ( use absolute positioning here )
 G94                                            ( use feedrate in units/min )
@@ -62,7 +62,7 @@ G53 G0 Z0    (move to z0 home position)
 G53 G0 X#<tool_touch_x_coords> Y#<tool_touch_y_coords>
 G53 G0 Z#<tool_touch_z_coords>
 
-(MSG, Change to tool #<_current_tool> then click Resume )
+(debug, Change to tool #<_selected_tool> then click Resume )
 M0
 
 G91
@@ -100,11 +100,13 @@ o<150> endif
 
 G90    (set absolute coordinates)
 G53 G0 Z0 (Send Spindle to home zero position)
+T #100
 
 (define new tool length offset parameters)
 #<new_tool_length_offset> = [ABS[#<spindle_zero_height> + #5063]]
+G10 L1 P #100 Z [#<new_tool_length_offset>]  (5400 = tool number)
 
-G10 L1 P #5400 Z [#<new_tool_length_offset>]  (5400 = tool number)
+M72                                          ( restore modal state )
 
 o<160> if [#<workspace_z> EQ 1]
   G54
@@ -124,8 +126,8 @@ o<160> else if [#<workspace_z> EQ 8]
   G59.2
 o<160> endif
 
-T #5400 G43  H #5400    (enable tool length offset)
-M72                                          ( restore modal state )
+M61 Q #100
+G43 H #100
 
 o<toolchange> endsub
 
