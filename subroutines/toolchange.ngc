@@ -22,7 +22,7 @@ O10 endif
 #<z_max_travel> = 110    (max z distance the tool travels before erroring out if not contact is made)
 #<xy_max_travel> = 25    (max xy distance the tool travels before erroring out if not contact is made)
 #<retract_distance> = 1    (distance the tool retracts after making contact during fast feed mode)
-#<spindle_zero_height> = 0    (G53 distance from home to spindle nose triggering point on touch plate)
+#<spindle_zero_height> = 116.140    (G53 distance from home to spindle nose triggering point on touch plate)
 #<tool_diameter_probe_mode> = #8    (activates the tool diameter probe subroutine section)
 #<tool_diameter_offset_mode> = #9    (activates the tool diameter offset position for probe subroutine section)
 #<tool_diameter> = #10    (current tool's diameter used for offseting probe position in x axis)
@@ -126,8 +126,12 @@ o<160> else if [#<workspace_z> EQ 8]
   G59.2
 o<160> endif
 
-M61 Q #100
-G43 H #100
+M61 Q#100
+o<010> if [1 EQ 1]
+  G43 H#100
+o<010> endif
+
+#<pc_tool_length> = #5403
 
 o<toolchange> endsub
 
