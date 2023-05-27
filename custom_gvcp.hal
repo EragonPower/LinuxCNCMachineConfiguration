@@ -1,2 +1,5 @@
 # Include your custom_gvcp HAL commands here
 # This file will not be overwritten when you run PNCconf again
+
+net spindle-fb-rpm-abs-filtered       =>   qtpyvcp.spindle-speed
+net spindle-at-speed        =>    qtpyvcp.spindle-at-speed-led

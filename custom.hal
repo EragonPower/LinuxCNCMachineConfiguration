@@ -14,15 +14,13 @@ addf or2.0 servo-thread
 #addf not.0 servo-thread
 addf debounce.0 servo-thread
 
-# ------ESTOP------
-#net estop-ext     =>  halui.estop.activate
-
 # ------Machine Enable Input------
-#net machine-enable <= hm2_7i76e.0.7i76.0.0.input-14
-#net machine-enable => halui.machine.on
+net machine-enable <= hm2_7i76e.0.7i76.0.0.input-08-not
+#net machine-enable => motion.enable
+net machine-enable => halui.machine.on
 
 # ------Spindle dir------
-
+#net spindle-fb-rpm-abs-filtered       =>   qtpyvcp.spindle-encode-rpm.in
 # --- SPINDLE-CW ---
 setp hm2_7i76e.0.gpio.023.is_output true
 setp    hm2_7i76e.0.gpio.023.is_opendrain  true
@@ -106,6 +104,6 @@ net probe-TOUCH => hm2_7i76e.0.gpio.026.in
 net probe-TLO-debounced => or2.0.in0
 net probe-TOUCH => debounce.0.1.in
 net probe-TOUCH-debounced => debounce.0.1.out
-#net probe-TOUCH-debounced => or2.0.in1
+net probe-TOUCH-debounced => or2.0.in1
 net probe-in => or2.0.out
 #net probe-in => debounce.0.0.out 

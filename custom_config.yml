@@ -39,3 +39,7 @@ settings:
   backplot.multitool-colors:
     default_value: True
 
+data_plugins:
+ tooltable:
+    kwargs:
+      columns: TDZR 
