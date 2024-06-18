@@ -78,14 +78,24 @@ setp hm2_7i76e.0.gpio.019.invert_output true
 net coolant-mist      <=  iocontrol.0.coolant-mist
 net coolant-flood     <=  iocontrol.0.coolant-flood
 
-setp hm2_7i76e.0.gpio.021.is_output true
-setp    hm2_7i76e.0.gpio.021.is_opendrain  true
-net coolant-flood  =>     hm2_7i76e.0.gpio.021.out
-setp hm2_7i76e.0.gpio.021.invert_output true
+setp hm2_7i76e.0.gpio.018.is_output true
+setp    hm2_7i76e.0.gpio.018.is_opendrain  true
+net coolant-mist  =>     hm2_7i76e.0.gpio.018.out
+setp hm2_7i76e.0.gpio.018.invert_output true
+
+setp hm2_7i76e.0.gpio.017.is_output true
+setp    hm2_7i76e.0.gpio.017.is_opendrain  true
+net coolant-mist  =>     hm2_7i76e.0.gpio.017.out
+setp hm2_7i76e.0.gpio.017.invert_output true
+
+#setp hm2_7i76e.0.gpio.021.is_output true
+#setp    hm2_7i76e.0.gpio.021.is_opendrain  true
+#net coolant-flood  =>     hm2_7i76e.0.gpio.021.out
+#setp hm2_7i76e.0.gpio.021.invert_output true
 
 setp hm2_7i76e.0.gpio.022.is_output true
 setp    hm2_7i76e.0.gpio.022.is_opendrain  true
-net coolant-mist  =>     hm2_7i76e.0.gpio.022.out
+net coolant-flood  =>     hm2_7i76e.0.gpio.022.out
 setp hm2_7i76e.0.gpio.022.invert_output true
 
 setp hm2_7i76e.0.gpio.020.is_output true
