@@ -1,7 +1,26 @@
 # Include your custom HAL commands here
 # This file will not be overwritten when you run PNCconf again
 # Edits
+#-----------------------External Offset Scripting-----------------------
+loadrt external_offsets
 
+# Aggiungi componenti alle thread
+addf external_offsets.update servo-thread
+addf motion-command-handler servo-thread
+addf motion-controller servo-thread
+
+# Configura i pin e le net
+net x-pos axis.x.motor-pos-cmd => external_offsets.x-pos
+net y-pos axis.y.motor-pos-cmd => external_offsets.y-pos
+net z-offset-counts external_offsets.z-offset-counts => axis.z.eoffset-counts
+net z-offset-enable external_offsets.z-offset-enable => axis.z.eoffset-enable
+net z-offset-scale external_offsets.z-offset-scale => axis.z.eoffset-scale
+
+# Configurazioni per abilitare gli external_offsets
+setp axis.z.eoffset-enable 1
+setp axis.z.eoffset-scale 1.0
+
+#-----------------------External Offset Scripting-----------------------
 
 loadrt and2 count=2
 loadrt or2 count=1
@@ -111,9 +130,11 @@ net probe-TLO-overtravel => hm2_7i76e.0.7i76.0.0.input-05
 net probe-TLO-debounced => debounce.0.0.out 
 net probe-TOUCH => hm2_7i76e.0.gpio.026.in
 
-net probe-TLO-debounced => or2.0.in0
+#net probe-TLO-debounced => or2.0.in0
 net probe-TOUCH => debounce.0.1.in
-net probe-TOUCH-debounced => debounce.0.1.out
-net probe-TOUCH-debounced => or2.0.in1
-net probe-in => or2.0.out
+#net probe-TOUCH-debounced => debounce.0.1.out
+#net probe-TOUCH-debounced => or2.0.in1
+#net probe-in => or2.0.out
+
+net probe-in => debounce.0.1.out
 #net probe-in => debounce.0.0.out 
