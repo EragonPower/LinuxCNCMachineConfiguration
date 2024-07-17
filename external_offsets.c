@@ -28,17 +28,20 @@ static int comp_id;
 
 // Function to load matrix from file
 void load_matrix(const char *filename) {
+	rtapi_print_msg(RTAPI_MSG_ERR, "Loading matrix\n");
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
         rtapi_print_msg(RTAPI_MSG_ERR, "Error opening matrix file\n");
         return;
     }
-    while (fscanf(file, "%f, %f, %f", &points[num_points].x, &points[num_points].y, &points[num_points].z_offset) == 3) {
+    while (fscanf(file, "%f, %f, %f", &points[num_points].x, &points[num_points].y, &points[num_points].z_offset) == 3) { 
         num_points++;
         if (num_points >= MAX_POINTS) {
+			rtapi_print_msg(RTAPI_MSG_ERR, "Finished reading matrix\n");
             break;
         }
     }
+    rtapi_print_msg(RTAPI_MSG_ERR, "Unloading matrix\n");
     fclose(file);
 }
 

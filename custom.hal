@@ -2,23 +2,21 @@
 # This file will not be overwritten when you run PNCconf again
 # Edits
 #-----------------------External Offset Scripting-----------------------
-loadrt external_offsets
+#loadrt external_offsets
 
 # Aggiungi componenti alle thread
-addf external_offsets.update servo-thread
-addf motion-command-handler servo-thread
-addf motion-controller servo-thread
+#addf external_offsets.update servo-thread
 
 # Configura i pin e le net
-net x-pos axis.x.motor-pos-cmd => external_offsets.x-pos
-net y-pos axis.y.motor-pos-cmd => external_offsets.y-pos
-net z-offset-counts external_offsets.z-offset-counts => axis.z.eoffset-counts
-net z-offset-enable external_offsets.z-offset-enable => axis.z.eoffset-enable
-net z-offset-scale external_offsets.z-offset-scale => axis.z.eoffset-scale
+#net x-pos axis.x.motor-pos-cmd => external_offsets.x-pos
+#net y-pos axis.y.motor-pos-cmd => external_offsets.y-pos
+#net z-offset-counts external_offsets.z-offset-counts => axis.z.eoffset-counts
+#net z-offset-enable external_offsets.z-offset-enable => axis.z.eoffset-enable
+#net z-offset-scale external_offsets.z-offset-scale => axis.z.eoffset-scale
 
 # Configurazioni per abilitare gli external_offsets
-setp axis.z.eoffset-enable 1
-setp axis.z.eoffset-scale 1.0
+#setp axis.z.eoffset-enable 1
+#setp axis.z.eoffset-scale 1.0
 
 #-----------------------External Offset Scripting-----------------------
 
