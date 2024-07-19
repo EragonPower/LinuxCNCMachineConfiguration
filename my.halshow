@@ -1,0 +1,7 @@
+# halshow watchlist created Thu Jul 18 17:05:04 CEST 2024
+
+pin+z_offset.z_output
+pin+z_offset.x_coord
+pin+z_offset.y_coord
+pin+axis.x.pos-cmd
+pin+axis.y.pos-cmd

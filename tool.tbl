@@ -23,4 +23,4 @@ T25  P0   Z+37.201167 ; 2,5mm HSS drill
 T30  P0   D+6.000000 Z+31.699500 ; 6mm Z4 45° Carbide-Chanfer
 T31  P0   D+6.000000 Z+49.377834 ; reduced shank 6mm endmill
 T90  P0   D+50.000000 ; 50mm Z3 Face-mill
-T99  P0   D+3.000000 Z+96.809500 ; Probe
+T99  P0   D+3.000000 Z+88.861833 ; Probe
