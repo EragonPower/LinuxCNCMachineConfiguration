@@ -1,6 +1,5 @@
 o<go_to_g30> sub
 
-M73
 G90
 G53 G0 Z0
 G30
