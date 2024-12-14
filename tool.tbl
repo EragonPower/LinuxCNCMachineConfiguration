@@ -1,6 +1,6 @@
 T1   P0   D+6.000000 Z+31.244500 ; 6mm Z1 Aluminum ZrN Carbide-Endmill
-T2   P0   D+5.990000 Z+33.192833 ; 6mm Z2 Aluminum ChipBraker Carbide-Endmill
-T3   P0   D+5.950000 Z+33.736166 ; 6mm Z3 Aluminum Finisher Carbide-Endmill
+T2   P0   D+5.990000 Z+33.544864 ; 6mm Z2 Aluminum ChipBraker Carbide-Endmill
+T3   P0   D+5.950000 Z+33.546530 ; 6mm Z3 Aluminum Finisher Carbide-Endmill
 T4   P0   D+8.000000 Z+40.631167 ; 8mm Z3 Aluminum Carbide-Endmill
 T5   P0   D+6.000000 ; 6mm Z4 Steel TiAlN Carbide-Endmill
 T6   P0   D+3.000000 Z+29.322833 ; 3mm Z4 Steel TiAlN Carbide-Endmill

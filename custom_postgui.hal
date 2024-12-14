@@ -1,6 +1,27 @@
 # Include your custom_postgui HAL commands here
 # This file will not be overwritten when you run PNCconf again
+loadrt time
+loadrt not
 
+addf time.0 servo-thread
+addf not.0 servo-thread
 
+#  ---manual tool change signals---
+net tool-change-request     =>  qtpyvcp_manualtoolchange.change
+net tool-change-confirmed   <=  qtpyvcp_manualtoolchange.changed
+net tool-number             =>  qtpyvcp_manualtoolchange.number
+
+net prog-running not.0.in <= halui.program.is-idle
+net cycle-timer time.0.start <= not.0.out
+net cycle-seconds qtpyvcp.timerseconds.in <= time.0.seconds
+net cycle-minutes qtpyvcp.timerminutes.in <= time.0.minutes
+net cycle-hours qtpyvcp.timerhours.in <= time.0.hours
+
+net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
+net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
+net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
+net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
+
+net spindle-vel-fb-rpm       =>   qtpyvcp.spindle-encoder-rpm.in
 
 
