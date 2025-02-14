@@ -56,23 +56,23 @@ net mesaSpindleREV and2.1.out
 
 # --- X drive ALM ---
 setp hm2_7i76e.0.gpio.028.is_output false
-net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.gpio.028.in_not
+net x-fault => joint.0.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-09
 
 # --- X2 drive ALM ---
 setp hm2_7i76e.0.gpio.029.is_output false
-net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.gpio.029.in_not
+net x2-fault => joint.1.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-10
 
 # --- Y drive ALM ---
 setp hm2_7i76e.0.gpio.030.is_output false
-net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.gpio.030.in_not
+net y-fault => joint.2.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-11
 
 # --- Z drive ALM ---
 setp hm2_7i76e.0.gpio.031.is_output false
-net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.gpio.031.in_not
+net z-fault => joint.3.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-12
 
 # --- A drive ALM ---
 setp hm2_7i76e.0.gpio.032.is_output false
-net a-fault => joint.4.amp-fault-in <= hm2_7i76e.0.gpio.032.in_not
+net a-fault => joint.4.amp-fault-in <= hm2_7i76e.0.7i76.0.0.input-13
 
 # --- Spindle ALM ---
 net spindle-fault => spindle.0.amp-fault-in <=  hm2_7i76e.0.7i76.0.0.input-07-not
@@ -120,7 +120,7 @@ net probe-TLO => debounce.0.0.in
 net probe-TLO-overtravel => hm2_7i76e.0.7i76.0.0.input-05
 
 net probe-TLO-debounced => debounce.0.0.out 
-net probe-TOUCH => hm2_7i76e.0.gpio.026.in
+net probe-TOUCH => hm2_7i76e.0.gpio.032.in
 
 net probe-TLO-debounced => or2.0.in0
 net probe-TOUCH => debounce.0.1.in
